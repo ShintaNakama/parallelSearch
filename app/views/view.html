@@ -1,0 +1,32 @@
+<h1>{{.Name }}で検索</h1>
+
+<p>[<a href="/form/">Form</a>]</p>
+<div id="park">
+  <h2>{{.Name }}周辺の公園</h2>
+</div>
+<div id="yakiniku">
+  <h2>{{.Name }}周辺の焼肉</h2>
+</div>
+<div id="izakaya">
+  <h2>{{.Name }}周辺の居酒屋</h2>
+</div>
+<script type="text/javascript">
+  function renderStrutct(data, elment){
+    for(var i = 0; i < data['results'].length; i++){
+      var p = document.createElement('p');
+      p.className = 'park_data'
+      var str = document.createTextNode(data['results'][i]['name']);
+      p.appendChild(str);
+      elment.appendChild(p);
+    }
+  }
+  var parkData = {{printf "%s" .Park}}
+  var parkDiv = document.getElementById('park')
+  renderStrutct(parkData, parkDiv)
+  var yakinikukData = {{printf "%s" .Yakiniku}}
+  var yakinikuDiv = document.getElementById('yakiniku')
+  renderStrutct(yakinikukData, yakinikuDiv)
+  var izakayaData = {{printf "%s" .Izakaya}}
+  var izakayaDiv = document.getElementById('izakaya')
+  renderStrutct(izakayaData, izakayaDiv)
+</script>
